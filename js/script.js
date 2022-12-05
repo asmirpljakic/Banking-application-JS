@@ -7,7 +7,8 @@
 const account1 = {
   owner: 'Asmir Pljakić',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
+  interestRate: 2.5, // %,
+  transferRate: 0.03, // % 0.03
   pin: 1111,
   movementsDates: [
     '2021-11-18T21:31:17.178Z',
@@ -26,7 +27,8 @@ const account1 = {
 const account2 = {
   owner: 'Berina Pepić',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5, // %
+  interestRate: 3.7, // %
+  transferRate: 0.02, // % 0.02
   pin: 2222,
   movementsDates: [
     '2021-11-18T21:31:17.178Z',
@@ -45,7 +47,8 @@ const account2 = {
 const account3 = {
   owner: 'Ismail Carovać',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7, // %
+  interestRate: 4.2, // %
+  transferRate: 0.02, // % 0.02
   pin: 3333,
   movementsDates: [
     '2019-11-01T13:15:33.035Z',
@@ -64,7 +67,8 @@ const account3 = {
 const account4 = {
   owner: 'Semir Pljakić',
   movements: [430, 1000, 700, 50, 90, -100, 950, 700],
-  interestRate: 4.2, // %
+  interestRate: 1.7, // %
+  transferRate: 0.15, // % 0.15
   pin: 4444,
   movementsDates: [
     '2019-11-01T13:15:33.035Z',
@@ -82,7 +86,8 @@ const account4 = {
 const account5 = {
   owner: 'Seid Semsović',
   movements: [830, 430, -100, 950, 700, 50, -220, 550],
-  interestRate: 2.7, // %
+  interestRate: 2.8, // %
+  transferRate: 0.025, // % 0.025
   pin: 5555,
   movementsDates: [
     '2019-11-01T13:15:33.035Z',
@@ -101,7 +106,8 @@ const account5 = {
 const account6 = {
   owner: 'Naila Zukanović',
   movements: [430, -22, 750, 40, -400, 510, -190, 2724],
-  interestRate: 1.8, // %
+  interestRate: 1.1, // %
+  transferRate: -18.69, // %  x18.96 %
   pin: 6666,
   movementsDates: [
     '2019-11-01T13:15:33.035Z',
@@ -283,6 +289,23 @@ const startLogOutTimer = function () {
   return timer;
 };
 
+const hideContainer = function () {
+  setTimeout(function () {
+    containerApp.classList.add('hidden');
+  }, 800);
+};
+
+const showContainer = function () {
+  containerApp.classList.remove('hidden');
+  setTimeout(function () {
+    containerApp.style.opacity = 100;
+
+    //Display UI and message
+    labelWelcome.textContent = `Wellcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+  }, 100);
+};
 // Functions
 /////////////////////////////////////////////////
 
@@ -294,6 +317,7 @@ let currentAccount, timer;
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
 
+hideContainer();
 //LOGIN:
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -312,11 +336,7 @@ btnLogin.addEventListener('click', function (e) {
     if (timer) clearInterval(timer);
     timer = startLogOutTimer();
 
-    //Display UI and message
-    labelWelcome.textContent = `Wellcome back, ${
-      currentAccount.owner.split(' ')[0]
-    }`;
-    containerApp.style.opacity = 100;
+    showContainer();
 
     const now = new Date();
     const options = {
@@ -339,7 +359,7 @@ btnLogin.addEventListener('click', function (e) {
 
     //Hide UI
     containerApp.style.opacity = 0;
-
+    hideContainer();
     document.querySelector('.welcome').textContent = `Log in to get started`;
   }
 });
@@ -363,7 +383,8 @@ btnTransfer.addEventListener('click', function (e) {
   ) {
     // Doing the transfer
     currentAccount.movements.push(-amount);
-    receiverAcc.movements.push(amount);
+
+    receiverAcc.movements.push(amount - amount * receiverAcc.transferRate);
 
     // Add transfer date:
     currentAccount.movementsDates.push(new Date().toISOString());
