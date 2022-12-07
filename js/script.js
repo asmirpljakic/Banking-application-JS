@@ -45,8 +45,8 @@ const account2 = {
 };
 
 const account3 = {
-  owner: 'Ismail Carovać',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  owner: 'Ismail Carovac',
+  movements: [200, -200, 340, -300, 2750, 50, 400, -460],
   interestRate: 4.2, // %
   transferRate: 0.02, // % 0.02
   pin: 3333,
@@ -122,7 +122,57 @@ const account6 = {
   currency: 'TRY',
   locale: 'tr-TR', // tr-TR
 };
-const accounts = [account1, account2, account3, account4, account5, account6];
+
+const account7 = {
+  owner: 'Semin Zoranić',
+  movements: [453, 3400, -150, -790, -3210, -1000, 4300, -30],
+  interestRate: 3.7, // %
+  transferRate: 0.02, // % 0.02
+  pin: 7777,
+  movementsDates: [
+    '2021-11-18T21:31:17.178Z',
+    '2021-12-23T07:42:02.383Z',
+    '2022-01-28T09:15:04.904Z',
+    '2022-04-01T10:17:24.185Z',
+    '2022-11-30T14:11:59.604Z',
+    '2022-12-01T17:01:17.194Z',
+    '2022-12-02T10:36:17.929Z',
+    '2022-12-03T10:51:36.790Z',
+  ],
+  currency: 'EUR',
+  locale: 'en-US', // en-US
+};
+
+const account8 = {
+  owner: 'Berin Rebronja',
+  movements: [430, 50, 700, 50, -500, -100, 950, 700],
+  interestRate: 1.7, // %
+  transferRate: -0.05, // % 0.15
+  pin: 8888,
+  movementsDates: [
+    '2019-11-01T13:15:33.035Z',
+    '2019-11-30T09:48:16.867Z',
+    '2019-12-25T06:04:23.907Z',
+    '2022-01-25T14:18:46.235Z',
+    '2022-12-01T16:33:06.386Z',
+    '2022-12-02T14:43:26.374Z',
+    '2022-12-02T18:49:59.371Z',
+    '2022-12-04T12:01:20.894Z',
+  ],
+  currency: 'USD',
+  locale: 'en-US', // en-US
+};
+
+const accounts = [
+  account1,
+  account2,
+  account3,
+  account4,
+  account5,
+  account6,
+  account7,
+  account8,
+];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -265,7 +315,7 @@ const updateUI = function (acc) {
 };
 
 const startLogOutTimer = function () {
-  let time = 120;
+  let time = 60;
 
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
@@ -274,11 +324,12 @@ const startLogOutTimer = function () {
     //1)In each call, print the remaining time to UI
     labelTimer.textContent = `${min}:${sec}`;
 
-    //2) When 0 secounds, stop timer and log out user
+    //2) When 0 secounds, stop timer and log out user and hide
     if (time === 0) {
       clearInterval(timer);
-      labelWelcome.textContent = `Log in to get started`;
       containerApp.style.opacity = 0;
+      hideContainer();
+      labelWelcome.textContent = `Log in to get started`;
     }
     //3) Decrese 1s
     time--;
@@ -427,6 +478,9 @@ btnClose.addEventListener('click', function (e) {
     document.querySelector(
       '.welcome'
     ).textContent = `'${currentAccount.owner}' account has been deleted.`;
+
+    //Clear timer:
+    clearInterval(timer);
   } else {
     alert('USERNAME OR PASSWROD NOT CORRECT!');
     clearInputUserPinCloseBtn();
