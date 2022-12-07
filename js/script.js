@@ -200,8 +200,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-// Functions
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+// Functions:
+
 const formatMovementDate = function (date, locale) {
   const calcdaysPassed = (date1, date2) =>
     Math.round(Math.abs((date2 - date1) / (1000 * 60 * 60 * 24)));
@@ -329,7 +332,7 @@ const startLogOutTimer = function () {
       clearInterval(timer);
       containerApp.style.opacity = 0;
       hideContainer();
-      labelWelcome.textContent = `Log in to get started`;
+      startWellcome();
     }
     //3) Decrese 1s
     time--;
@@ -357,8 +360,21 @@ const showContainer = function () {
     }`;
   }, 100);
 };
+
+const startWellcomeWithTimer = function () {
+  setTimeout(function () {
+    labelWelcome.innerHTML = `<p class="welcome">Log in to get started ${'&#149;'}</p>`;
+  }, 2000);
+};
+
+const startWellcome = function () {
+  labelWelcome.innerHTML = `<p class="welcome">Log in to get started ${'&#149;'}</p>`;
+};
+
 // Functions
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 //Event handler
 let currentAccount, timer;
@@ -408,10 +424,12 @@ btnLogin.addEventListener('click', function (e) {
     alert('USERNAME OR PASSWORD NOT CORRECT!');
     clearInputUserPin();
 
+    //change wellcome:
+    startWellcome();
+
     //Hide UI
     containerApp.style.opacity = 0;
     hideContainer();
-    document.querySelector('.welcome').textContent = `Log in to get started`;
   }
 });
 
@@ -481,6 +499,10 @@ btnClose.addEventListener('click', function (e) {
 
     //Clear timer:
     clearInterval(timer);
+    hideContainer();
+
+    //Restart wellcome label:
+    startWellcomeWithTimer();
   } else {
     alert('USERNAME OR PASSWROD NOT CORRECT!');
     clearInputUserPinCloseBtn();
