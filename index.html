@@ -18,11 +18,14 @@
     <!-- TOP NAVIGATION -->
     <nav>
       <p class="welcome">Log in to get started &#149;</p>
-      <img src="img/logo.png" alt="Logo" class="logo" />
+      <a href="https://github.com/Topgallantt" target="_blank"
+        ><img src="img/logo.png" alt="Logo" class="logo" />
+      </a>
       <form class="login">
         <input
           type="text"
           placeholder="user"
+          maxlength="2"
           class="login__input login__input--user"
         />
         <!-- In practice, use type="password" -->
@@ -79,7 +82,11 @@
       <div class="operation operation--transfer">
         <h2>Transfer money</h2>
         <form class="form form--transfer">
-          <input type="text" class="form__input form__input--to" />
+          <input
+            type="text"
+            maxlength="2"
+            class="form__input form__input--to"
+          />
           <input type="number" class="form__input form__input--amount" />
           <button class="form__btn form__btn--transfer">&rarr;</button>
           <label class="form__label">Transfer to</label>
@@ -119,9 +126,23 @@
       </p>
     </main>
 
-    <!-- <footer>
-      &copy; by Asmir Pljakić.
+    <!-- Footer -->
+    <!-- <footer class="footer">
+      <a href="https://github.com/Topgallantt" target="_blank"
+        ><img src="img/icon.png" alt="Logo" class="footer__logo" />
+      </a>
+
+      <p class="footer__copyright">
+        &copy; Copyright by
+        <a
+          class="footer__link"
+          target="_blank"
+          href="https://github.com/Topgallantt"
+          >Asmir Pljakić</a
+        >
+      </p>
     </footer> -->
+    <!-- Footer END -->
 
     <script src="js/script.js"></script>
   </body>
