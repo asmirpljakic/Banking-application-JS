@@ -321,6 +321,11 @@ const clearInputUserPin = function () {
   inputLoginUsername.focus();
 };
 
+const clearloanAmount = function () {
+  inputLoanAmount.value = '';
+  inputLoanAmount.blur();
+};
+
 const clearInputTransferAmount = function () {
   inputTransferTo.value = inputTransferAmount.value = '';
   inputTransferAmount.blur();
@@ -443,11 +448,14 @@ btnLogin.addEventListener('click', function (e) {
       options
     ).format(now);
 
+    //Clear all inputs
+    clearInputUserPinCloseBtn();
+    clearloanAmount();
+    clearInputTransferAmount();
     updateUI(currentAccount);
   } else {
     alert('USERNAME OR PASSWORD NOT CORRECT!');
     clearInputUserPin();
-
     //change wellcome:
     startWellcome();
 
