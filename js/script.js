@@ -163,6 +163,26 @@ const account8 = {
   locale: 'en-US', // en-US
 };
 
+const account9 = {
+  owner: 'Dženan Ramović',
+  movements: [830, 430, -100, 950, 700, 560, -220, 550],
+  interestRate: 2.8, // %
+  transferRate: 0.025, // % 0.025
+  pin: 4444,
+  movementsDates: [
+    '2019-11-01T13:15:33.035Z',
+    '2019-11-30T09:48:16.867Z',
+    '2019-12-25T06:04:23.907Z',
+    '2022-01-25T14:18:46.235Z',
+    '2022-12-01T16:33:06.386Z',
+    '2022-12-02T14:43:26.374Z',
+    '2022-12-02T18:49:59.371Z',
+    '2022-12-04T12:01:20.894Z',
+  ],
+  currency: 'KWD',
+  locale: 'ar-KW', // ar-KW
+};
+
 const accounts = [
   account1,
   account2,
@@ -172,6 +192,7 @@ const accounts = [
   account6,
   account7,
   account8,
+  account9,
 ];
 
 // Elements
@@ -318,7 +339,7 @@ const updateUI = function (acc) {
 };
 
 const startLogOutTimer = function () {
-  let time = 60;
+  let time = 10;
 
   const tick = function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
@@ -344,6 +365,9 @@ const startLogOutTimer = function () {
 };
 
 const hideContainer = function () {
+  //Zoom to 110%, i like this :)
+  containerApp.style.transform = 'scale(110%)';
+
   setTimeout(function () {
     containerApp.classList.add('hidden');
   }, 800);
