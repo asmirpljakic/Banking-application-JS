@@ -1,7 +1,8 @@
 # Banking-application-JS
 Banking application for money transfer :)
 
-Link: asmir-pljakic-banking-application-js.netlify.app
+Link:
+https://asmir-pljakic-banking-application-js.netlify.app/
 
 //Account 1:
 *user: ap or Ap
